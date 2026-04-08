@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jones Road Beauty — The Foundation Stick PDP</title>
+  <style>
+    /* ===== SHARED FONTS ===== */
+    @font-face { font-family: 'GeogrotesqueCondBoldWeb'; src: url('https://jrb-fonts-cdn.vercel.app/fonts/Geogrotesque.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'BaseMonoWideWeb'; src: url('https://jrb-fonts-cdn.vercel.app/fonts/BaseMonoWideThin_6014.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'RingsideWideWeb'; src: url('https://jrb-fonts-cdn.vercel.app/fonts/RingsideWide-Book_Web.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Canela'; src: url('https://jrb-fonts-cdn.vercel.app/fonts/Canela-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+
+    /* ===== SHARED DESIGN TOKENS ===== */
+    :root {
+      --font-display: GeogrotesqueCondBoldWeb, 'Arial Black', Impact, sans-serif;
+      --font-mono: BaseMonoWideWeb, Courier, 'Courier New', sans-serif;
+      --font-body: RingsideWideWeb, Helvetica, Arial, sans-serif;
+      --font-serif: Canela, serif;
+      --color-black: #000;
+      --color-white: #fff;
+      --color-warm-bg: #f6f2eb;
+      --color-border: #d0d0d0;
+      --ease-primary: cubic-bezier(.39, .575, .565, 1);
+    }
+
+    /* ===== SHARED RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); font-size: 16px; line-height: 100%; color: var(--color-black); letter-spacing: .025em; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: var(--color-white); }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+    /* ===== SHARED BUTTON ===== */
+    .button { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; font-weight: 550; text-transform: uppercase; letter-spacing: .4px; height: 40px; padding: 0 36px; border-radius: 2px; border: 1px solid var(--color-black); background: var(--color-black); color: var(--color-white); cursor: pointer; transition: background .4s var(--ease-primary), color .4s var(--ease-primary); }
+    .has-mouse .button:not(:disabled):hover { background: transparent; color: var(--color-black); }
+    @media screen and (min-width: 768px) { .button { font-size: 14px; height: 44px; } }
+
+    /* ============================================================
+       0. MOCK PDP HERO (context only)
+       ============================================================ */
+    .pdp-topbar { background: var(--color-black); color: var(--color-white); text-align: center; font-family: var(--font-body); font-size: 12px; padding: 10px 20px; letter-spacing: .03em; }
+    .pdp-topbar a { color: #ff6b9d; text-decoration: underline; }
+    .pdp-utilbar { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #eee; }
+    .pdp-utilbar__links { display: flex; gap: 20px; }
+    .pdp-logo { font-family: var(--font-display); font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-align: center; padding: 12px 20px; }
+    .pdp-nav { display: flex; justify-content: center; gap: 28px; padding: 12px 20px; border-bottom: 1px solid #eee; font-family: var(--font-display); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+    .pdp-hero { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr 1fr; gap: 0; padding: 32px 20px 48px; }
+    .pdp-hero__thumbs { display: flex; flex-direction: column; gap: 8px; padding-right: 12px; }
+    .pdp-hero__thumb { width: 72px; height: 72px; border-radius: 2px; overflow: hidden; border: 1px solid #ddd; cursor: pointer; }
+    .pdp-hero__thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .pdp-hero__main-img { aspect-ratio: 1; overflow: hidden; border-radius: 2px; max-height: 520px; }
+    .pdp-hero__main-img img { width: 100%; height: 100%; object-fit: cover; }
+    .pdp-hero__info { padding-left: 40px; }
+    .pdp-hero__title { font-family: var(--font-display); font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-block-end: 8px; }
+    .pdp-hero__rating { font-size: 14px; margin-block-end: 16px; display: flex; align-items: center; gap: 8px; }
+    .pdp-hero__rating-link { font-family: var(--font-body); font-size: 13px; color: var(--color-black); text-decoration: underline; }
+    .pdp-hero__shade-filters { display: flex; gap: 12px; margin-block-end: 12px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .5px; }
+    .pdp-hero__shade-filters span { cursor: pointer; }
+    .pdp-hero__shade-filters span.is-active { text-decoration: underline; text-underline-offset: 4px; }
+    .pdp-hero__swatches { display: flex; flex-wrap: wrap; gap: 6px; margin-block-end: 12px; }
+    .pdp-hero__swatch { width: 26px; height: 26px; border-radius: 100%; cursor: pointer; border: 2px solid transparent; }
+    .pdp-hero__swatch.is-active { border-color: var(--color-black); }
+    .pdp-hero__shade-name { font-family: var(--font-body); font-size: 14px; margin-block-end: 4px; }
+    .pdp-hero__shade-desc { font-family: var(--font-body); font-size: 13px; color: #666; margin-block-end: 16px; }
+    .pdp-hero__find-shade { font-family: var(--font-body); font-size: 13px; text-decoration: underline; margin-block-end: 20px; display: inline-block; }
+    .pdp-hero__atc { display: flex; border: 1px solid var(--color-black); margin-block-end: 12px; }
+    .pdp-hero__atc-btn { flex: 1; background: var(--color-black); color: var(--color-white); font-family: var(--font-mono); font-size: 13px; font-weight: 550; text-transform: uppercase; letter-spacing: .5px; padding: 14px 24px; border: none; cursor: pointer; text-align: center; }
+    .pdp-hero__atc-price { padding: 14px 20px; font-family: var(--font-body); font-size: 14px; display: flex; align-items: center; }
+    .pdp-hero__meta { font-family: var(--font-body); font-size: 12px; color: #666; line-height: 1.8; margin-block-end: 20px; }
+    .pdp-hero__meta span { margin-right: 8px; }
+    .pdp-hero__section-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 16px 0; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .pdp-hero__section-title::after { content: '+'; font-family: var(--font-serif); font-size: 20px; }
+    .pdp-hero__section-title.is-open::after { content: '\2212'; }
+    .pdp-hero__desc { font-family: var(--font-body); font-size: 14px; line-height: 1.65; color: #333; padding-block-end: 16px; border-top: none; }
+    .pdp-hero__asoy { margin-block-end: 20px; }
+    .pdp-hero__asoy-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-block-end: 12px; }
+    .pdp-hero__asoy-grid { display: flex; gap: 8px; }
+    .pdp-hero__asoy-img { width: 80px; height: 80px; border-radius: 100%; overflow: hidden; }
+    .pdp-hero__asoy-img img { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 900px) {
+      .pdp-hero { grid-template-columns: 1fr; }
+      .pdp-hero__thumbs { flex-direction: row; padding-right: 0; padding-bottom: 12px; }
+      .pdp-hero__info { padding-left: 0; padding-top: 24px; }
+    }
+
+    /* ============================================================
+       1. SHADE CONFIDENCE — V07: Hero Shade + Thumbnail Rail (compact)
+       ============================================================ */
+    .shade-hero { padding: 48px 20px; background: #f8f8f8; }
+    .shade-hero__inner { max-width: 1100px; margin: 0 auto; }
+    .shade-hero__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-black); margin-block-end: 10px; text-align: center; }
+    .shade-hero__heading { font-family: var(--font-serif); font-size: 36px; font-weight: 300; line-height: 1.2; color: var(--color-black); text-align: center; margin-block-end: 8px; text-wrap: balance; }
+    .shade-hero__subhead { display: none; }
+    .shade-hero__feature { display: flex; align-items: center; justify-content: center; gap: 24px; margin-block-end: 28px; }
+    .shade-hero__big { width: 140px; height: 140px; border-radius: 100%; background: #c9a776; box-shadow: 0 6px 20px rgba(0,0,0,.08); flex-shrink: 0; }
+    .shade-hero__feature-info { text-align: left; }
+    .shade-hero__feature-name { font-family: var(--font-serif); font-size: 26px; font-weight: 300; color: var(--color-black); margin-block-end: 4px; }
+    .shade-hero__feature-meta { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--color-black); margin-block-end: 4px; }
+    .shade-hero__feature-desc { font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: var(--color-black); max-width: 340px; }
+    .shade-hero__rail-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--color-black); text-align: center; margin-block-end: 12px; }
+    .shade-hero__rail { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 720px; margin: 0 auto; }
+    .shade-hero__dot { width: 28px; height: 28px; border-radius: 100%; cursor: pointer; border: 2px solid transparent; transition: transform .3s var(--ease-primary), border-color .3s var(--ease-primary); }
+    .has-mouse .shade-hero__dot:hover { transform: scale(1.12); }
+    .shade-hero__dot.is-active { border-color: var(--color-black); transform: scale(1.12); }
+    .shade-hero__cta { text-align: center; margin-block-start: 28px; }
+    @media (max-width: 640px) {
+      .shade-hero { padding: 36px 16px; }
+      .shade-hero__heading { font-size: 26px; line-height: 1.3; }
+      .shade-hero__feature { flex-direction: column; text-align: center; }
+      .shade-hero__feature-info { text-align: center; }
+      .shade-hero__big { width: 80px; height: 80px; }
+      .shade-hero__feature-name { font-size: 22px; }
+      .shade-hero__dot { width: 24px; height: 24px; }
+    }
+
+    /* ============================================================
+       2. BEFORE / AFTER — V13: Text Left + Slider Right
+       ============================================================ */
+    .ba-v13 { padding: 64px 20px; background: var(--color-white); }
+    .ba-v13__inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .ba-v13__copy { text-align: left; }
+    .ba-v13__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 16px; }
+    .ba-v13__heading { font-family: var(--font-serif); font-size: 42px; font-weight: 300; line-height: 1.15; text-wrap: balance; margin-block-end: 16px; }
+    .ba-v13__subhead { font-family: var(--font-body); font-size: 16px; line-height: 1.6; margin-block-end: 28px; max-width: 440px; }
+    .ba-v13__slider { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; }
+    .ba-v13__slider .a, .ba-v13__slider .b { position: absolute; inset: 0; }
+    .ba-v13__slider .a img, .ba-v13__slider .b img { width: 100%; height: 100%; object-fit: cover; }
+    .ba-v13__slider .b { clip-path: inset(0 50% 0 0); }
+    .ba-v13__line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; z-index: 2; }
+    .ba-v13__handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; border-radius: 100%; background: #fff; border: 2px solid #000; z-index: 3; display: flex; align-items: center; justify-content: center; }
+    .ba-v13__handle::before { content: '\2194'; font-size: 18px; color: #000; }
+    @media (max-width: 768px) {
+      .ba-v13 { padding: 40px 16px; }
+      .ba-v13__inner { grid-template-columns: 1fr; gap: 28px; }
+      .ba-v13__heading { font-size: 28px; }
+    }
+
+    /* ============================================================
+       3. BOBBI QUOTE — Black bg, portrait left + copy right
+       ============================================================ */
+    .bobbi-quote { background: var(--color-black); }
+    .bobbi-quote__inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; align-items: center; }
+    .bobbi-quote__img { width: 420px; aspect-ratio: 3 / 4; overflow: hidden; flex-shrink: 0; }
+    .bobbi-quote__img img { width: 100%; height: 100%; object-fit: cover; }
+    .bobbi-quote__content { padding: 64px 72px; }
+    .bobbi-quote__eyebrow { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,.5); margin-block-end: 24px; }
+    .bobbi-quote__text { font-family: var(--font-serif); font-size: 38px; font-weight: 300; line-height: 1.25; color: var(--color-white); margin-block-end: 28px; text-wrap: balance; }
+    .bobbi-quote__attr { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.5); }
+    @media (max-width: 900px) {
+      .bobbi-quote__inner { grid-template-columns: 1fr; }
+      .bobbi-quote__img { width: 100%; aspect-ratio: 16 / 9; }
+      .bobbi-quote__content { padding: 48px 24px; }
+      .bobbi-quote__text { font-size: 28px; }
+    }
+
+    /* ============================================================
+       4. SURVEY STATS — V10: Wide 4-Across Stat Row
+       ============================================================ */
+    .stats-row { background: #fff; padding: 96px 20px; }
+    .stats-row__inner { max-width: 1280px; margin: 0 auto; text-align: center; }
+    .stats-row__eyebrow { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+    .stats-row__heading { font-family: var(--font-serif); font-size: 44px; font-weight: 300; line-height: 1.15; margin-bottom: 16px; text-wrap: balance; max-width: 820px; margin-inline: auto; }
+    .stats-row__sub { font-family: var(--font-body); font-size: 16px; line-height: 1.6; max-width: 560px; margin: 0 auto 56px; }
+    .stats-row__grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); margin-bottom: 48px; }
+    .stats-row__item { padding: 48px 24px; text-align: center; border-right: 1px solid var(--color-border); }
+    .stats-row__item:last-child { border-right: none; }
+    .stats-row__stat { font-family: var(--font-serif); font-size: 78px; font-weight: 300; line-height: 1; margin-bottom: 16px; color: #000; }
+    .stats-row__item-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 550; margin-bottom: 8px; }
+    .stats-row__item-desc { font-family: var(--font-body); font-size: 13px; line-height: 1.55; color: #000; max-width: 220px; margin: 0 auto; }
+    .stats-row__source { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .5px; color: #666; margin-bottom: 24px; }
+    @media (max-width: 900px) {
+      .stats-row__grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-row__item:nth-child(2) { border-right: none; }
+      .stats-row__item:nth-child(1), .stats-row__item:nth-child(2) { border-bottom: 1px solid var(--color-border); }
+      .stats-row__stat { font-size: 60px; }
+    }
+    @media (max-width: 560px) {
+      .stats-row { padding: 56px 16px; }
+      .stats-row__heading { font-size: 30px; }
+      .stats-row__stat { font-size: 52px; }
+    }
+
+    /* ============================================================
+       5. HOW TO APPLY — V03: 3-Step Progression
+       ============================================================ */
+    .how-v03 { padding: 80px 20px; background: #f8f8f8; }
+    .how-v03__inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .how-v03__eyebrow { font-family: var(--font-display); font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 16px; }
+    .how-v03__heading { font-family: var(--font-serif); font-size: 46px; font-weight: 300; line-height: 1.2; text-wrap: balance; margin-block-end: 56px; }
+    .how-v03__progression { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-block-end: 56px; }
+    .how-v03__step { text-align: center; }
+    .how-v03__img { aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; margin-block-end: 20px; }
+    .how-v03__img img { width: 100%; height: 100%; object-fit: cover; }
+    .how-v03__num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-block-end: 8px; }
+    .how-v03__verb { font-family: var(--font-serif); font-size: 30px; font-weight: 300; margin-block-end: 10px; }
+    .how-v03__desc { font-family: var(--font-body); font-size: 14px; line-height: 1.55; max-width: 280px; margin: 0 auto; }
+    @media (max-width: 768px) {
+      .how-v03 { padding: 56px 16px; }
+      .how-v03__heading { font-size: 30px; }
+      .how-v03__progression { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    /* ============================================================
+       6. INGREDIENTS — 4-across equal cards
+       ============================================================ */
+    .ingr { padding: 80px 20px; background: var(--color-white); }
+    .ingr__inner { max-width: 1200px; margin: 0 auto; }
+    .ingr__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; text-align: center; margin-block-end: 16px; }
+    .ingr__heading { font-family: var(--font-serif); font-size: 38px; font-weight: 300; line-height: 1.2; text-align: center; margin-block-end: 48px; text-wrap: balance; }
+    .ingr__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .ingr__card { background: #f8f8f8; padding: 32px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .ingr__icon { width: 64px; height: 64px; margin-block-end: 20px; display: flex; align-items: center; justify-content: center; }
+    .ingr__icon svg { width: 56px; height: 56px; }
+    .ingr__name { font-family: var(--font-serif); font-size: 24px; font-weight: 300; line-height: 1.2; margin-block-end: 16px; }
+    .ingr__detail { margin-block-end: 10px; }
+    .ingr__detail-label { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-block-end: 4px; }
+    .ingr__detail-value { font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: var(--color-black); }
+    .ingr__divider { width: 32px; height: 1px; background: var(--color-border); margin: 6px auto 16px; }
+    @media (max-width: 900px) {
+      .ingr__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .ingr { padding: 56px 16px; }
+      .ingr__heading { font-size: 28px; margin-block-end: 32px; }
+      .ingr__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       7. FAQs
+       ============================================================ */
+    .faqs { padding: 80px 20px; background: #f8f8f8; }
+    .faqs__inner { max-width: 760px; margin: 0 auto; }
+    .faqs__heading { font-family: var(--font-display); font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-block-end: 48px; }
+    .faqs__item { border-bottom: 1px solid var(--color-border); }
+    .faqs__question { font-family: var(--font-body); font-size: 16px; line-height: 1.5; font-weight: 400; padding: 20px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; background: none; border: none; width: 100%; text-align: left; color: var(--color-black); letter-spacing: .025em; }
+    .faqs__question::after { content: '+'; font-family: var(--font-serif); font-size: 24px; flex-shrink: 0; transition: transform .3s var(--ease-primary); }
+    .faqs__question[aria-expanded="true"]::after { transform: rotate(45deg); }
+    .faqs__answer { font-family: var(--font-body); font-size: 15px; line-height: 1.7; color: #444; padding: 0 0 24px; display: none; }
+    .faqs__answer.is-open { display: block; }
+
+    /* ============================================================
+       8. REVIEWS
+       ============================================================ */
+    .reviews { padding: 80px 20px; background: var(--color-white); }
+    .reviews__inner { max-width: 1200px; margin: 0 auto; }
+    .reviews__heading { font-family: var(--font-serif); font-size: 44px; font-weight: 300; text-align: center; margin-block-end: 32px; }
+    .reviews__badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-block-end: 40px; }
+    .reviews__badge { background: #f2f2f2; padding: 32px 20px; text-align: center; }
+    .reviews__badge-value { font-family: var(--font-mono); font-size: 32px; font-weight: 400; letter-spacing: -1px; line-height: 1; margin-block-end: 8px; }
+    .reviews__badge-stars { font-size: 16px; letter-spacing: 1px; margin-block-end: 8px; }
+    .reviews__badge-label { font-family: var(--font-body); font-size: 13px; line-height: 1.4; color: #444; }
+    .reviews__badge-headline { font-family: var(--font-serif); font-size: 28px; font-weight: 300; line-height: 1.15; margin-block-end: 8px; }
+    .reviews__toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 0; border-top: 1px solid #eee; margin-block-end: 8px; flex-wrap: wrap; }
+    .reviews__search { font-family: var(--font-body); font-size: 14px; padding: 10px 16px; border: 1px solid var(--color-border); background: transparent; flex: 0 0 220px; letter-spacing: .025em; outline: none; }
+    .reviews__search::placeholder { color: #999; }
+    .reviews__filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .reviews__filter { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .8px; padding: 8px 16px; border: 1px solid var(--color-border); background: transparent; cursor: pointer; color: var(--color-black); appearance: none; }
+    .reviews__card { padding: 28px 0; border-bottom: 1px solid #eee; }
+    .reviews__card-header { display: flex; justify-content: space-between; align-items: center; margin-block-end: 12px; }
+    .reviews__card-name { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+    .reviews__card-date { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .4px; color: #999; }
+    .reviews__card-stars { font-size: 14px; margin-block-end: 10px; }
+    .reviews__card-body { font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: #333; }
+    @media (max-width: 768px) {
+      .reviews__badges { grid-template-columns: repeat(2, 1fr); }
+      .reviews__toolbar { flex-direction: column; align-items: stretch; }
+      .reviews__search { flex: 1 1 auto; }
+    }
+  </style>
+</head>
+<body class="has-mouse">
+
+  <!-- ============================================================
+       0. MOCK PDP HERO (context)
+       ============================================================ -->
+  <div class="pdp-topbar">Introducing Your Next Holy Grail: <a href="#">Your Skin Foundation Stick</a> Is Here</div>
+  <div class="pdp-utilbar">
+    <div class="pdp-utilbar__links">
+      <span>Returns &amp; Exchanges</span>
+      <span>Find Your Shade</span>
+      <span>justBOBBI</span>
+    </div>
+    <div class="pdp-utilbar__links">
+      <span>&#x1F50D;</span>
+      <span>$USD</span>
+      <span>&#9679; Bag: 6</span>
+    </div>
+  </div>
+  <div class="pdp-logo">Jones Road</div>
+  <nav class="pdp-nav">
+    <a href="#">Shop All</a>
+    <a href="#">Face</a>
+    <a href="#">Kits</a>
+    <a href="#">Lips</a>
+    <a href="#">Eyes</a>
+    <a href="#">Skin</a>
+    <a href="#">Body</a>
+    <a href="#">More</a>
+  </nav>
+
+  <div class="pdp-hero">
+    <div class="pdp-hero__thumbs">
+      <div class="pdp-hero__thumb"><img src="https://air-prod.imgix.net/f429435e-e95e-4c24-9691-d67623a86695.jpg?w=144&h=144&fit=crop&auto=format" alt="Thumb 1"></div>
+      <div class="pdp-hero__thumb"><img src="https://air-prod.imgix.net/3dd6c299-6630-440e-8f51-8c78fdbeae18.jpg?w=144&h=144&fit=crop&auto=format" alt="Thumb 2"></div>
+      <div class="pdp-hero__thumb"><img src="https://air-prod.imgix.net/1d93b483-f9c5-4e9e-b8a5-1a998622b495.jpg?w=144&h=144&fit=crop&auto=format" alt="Thumb 3"></div>
+      <div class="pdp-hero__thumb"><img src="https://air-prod.imgix.net/26c698d6-9998-4f96-bae0-4f0671452fc6.jpg?w=144&h=144&fit=crop&auto=format" alt="Thumb 4"></div>
+      <div class="pdp-hero__thumb"><img src="https://air-prod.imgix.net/476d8004-173d-4a6b-b040-8ee0f7a79da0.jpg?w=144&h=144&fit=crop&auto=format" alt="Thumb 5"></div>
+    </div>
+    <div class="pdp-hero__main-img">
+      <img src="https://air-prod.imgix.net/f429435e-e95e-4c24-9691-d67623a86695.jpg?w=800&h=800&fit=crop&auto=format" alt="Your Skin Foundation Stick">
+    </div>
+    <div class="pdp-hero__info">
+      <h1 class="pdp-hero__title">Your Skin Foundation Stick</h1>
+      <div class="pdp-hero__rating">
+        <span>&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+        <a href="#reviews" class="pdp-hero__rating-link">(52,406 Reviews)</a>
+      </div>
+
+      <div class="pdp-hero__shade-filters">
+        <span class="is-active">All</span>
+        <span>Fair</span>
+        <span>Light</span>
+        <span>Medium</span>
+        <span>Dark</span>
+        <span>Deep</span>
+      </div>
+      <div class="pdp-hero__swatches">
+        <span class="pdp-hero__swatch is-active" style="background:#f5e0cc;"></span>
+        <span class="pdp-hero__swatch" style="background:#f0dcc4;"></span>
+        <span class="pdp-hero__swatch" style="background:#eed5b8;"></span>
+        <span class="pdp-hero__swatch" style="background:#ecd0ae;"></span>
+        <span class="pdp-hero__swatch" style="background:#e8cba6;"></span>
+        <span class="pdp-hero__swatch" style="background:#e3c39c;"></span>
+        <span class="pdp-hero__swatch" style="background:#dfbd95;"></span>
+        <span class="pdp-hero__swatch" style="background:#dab68b;"></span>
+        <span class="pdp-hero__swatch" style="background:#d4b68a;"></span>
+        <span class="pdp-hero__swatch" style="background:#d0ae80;"></span>
+        <span class="pdp-hero__swatch" style="background:#cba978;"></span>
+        <span class="pdp-hero__swatch" style="background:#c9a776;"></span>
+        <span class="pdp-hero__swatch" style="background:#c19c69;"></span>
+        <span class="pdp-hero__swatch" style="background:#b9925e;"></span>
+        <span class="pdp-hero__swatch" style="background:#b08854;"></span>
+        <span class="pdp-hero__swatch" style="background:#a87e4a;"></span>
+        <span class="pdp-hero__swatch" style="background:#9f7541;"></span>
+        <span class="pdp-hero__swatch" style="background:#966c39;"></span>
+        <span class="pdp-hero__swatch" style="background:#8d6930;"></span>
+        <span class="pdp-hero__swatch" style="background:#7a5825;"></span>
+        <span class="pdp-hero__swatch" style="background:#6f4f1f;"></span>
+        <span class="pdp-hero__swatch" style="background:#65461a;"></span>
+        <span class="pdp-hero__swatch" style="background:#5b3d12;"></span>
+        <span class="pdp-hero__swatch" style="background:#543900;"></span>
+        <span class="pdp-hero__swatch" style="background:#3d2900;"></span>
+      </div>
+      <p class="pdp-hero__shade-name"><strong>Alabaster</strong> is pale with pink undertones</p>
+      <a href="#" class="pdp-hero__find-shade">Find my Shade</a>
+
+      <div class="pdp-hero__atc">
+        <button class="pdp-hero__atc-btn">Add to Bag</button>
+        <span class="pdp-hero__atc-price">$46</span>
+      </div>
+
+      <p class="pdp-hero__meta">
+        <span>&#x25D4; Pay in 2 interest-free installments of $23.00 with shop&#x2119;&#x2461;</span><br>
+        &#x1F4E6; Free shipping on US orders over $55<br>
+        &#x21A9; Free &amp; Easy Returns
+      </p>
+
+      <div class="pdp-hero__asoy">
+        <p class="pdp-hero__asoy-title">As Seen on You</p>
+        <div class="pdp-hero__asoy-grid">
+          <div class="pdp-hero__asoy-img"><img src="https://air-prod.imgix.net/1d93b483-f9c5-4e9e-b8a5-1a998622b495.jpg?w=160&h=160&fit=crop&auto=format" alt=""></div>
+          <div class="pdp-hero__asoy-img"><img src="https://air-prod.imgix.net/26c698d6-9998-4f96-bae0-4f0671452fc6.jpg?w=160&h=160&fit=crop&auto=format" alt=""></div>
+          <div class="pdp-hero__asoy-img"><img src="https://air-prod.imgix.net/476d8004-173d-4a6b-b040-8ee0f7a79da0.jpg?w=160&h=160&fit=crop&auto=format" alt=""></div>
+        </div>
+      </div>
+
+      <div class="pdp-hero__section-title is-open">Product Description</div>
+      <p class="pdp-hero__desc">Your Skin Foundation Stick is our take on a foundation stick, offering light-medium, buildable coverage. Its barrier-strengthening formula with Ceramide NP blends seamlessly into the skin, leaving you with an even, fresh complexion that looks like your skin on its best day.</p>
+      <p class="pdp-hero__desc" style="font-size:12px; color:#888;">*Non-comedogenic. (9.5 g / 0.33 oz)</p>
+
+      <div class="pdp-hero__section-title">Shade Descriptions</div>
+      <div class="pdp-hero__section-title">How to Use</div>
+      <div class="pdp-hero__section-title">Ingredients</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       1. SHADE CONFIDENCE — V07: Hero Shade + Thumbnail Rail
+       ============================================================ -->
+  <section class="shade-hero">
+    <div class="shade-hero__inner">
+      <p class="shade-hero__eyebrow">30 Shades</p>
+      <h2 class="shade-hero__heading">One stick. The right shade for&nbsp;every&nbsp;you.</h2>
+      <p class="shade-hero__subhead">Built across fair, medium, tan, and deep with warm, cool, and neutral undertones in&nbsp;every&nbsp;family.</p>
+
+      <div class="shade-hero__feature">
+        <div class="shade-hero__big"></div>
+        <div class="shade-hero__feature-info">
+          <h3 class="shade-hero__feature-name">Medium Tan</h3>
+          <p class="shade-hero__feature-meta">Warm-Golden Undertone</p>
+          <p class="shade-hero__feature-desc">Best for medium-tan skin with warm golden undertones. The most-loved shade in early&nbsp;testing.</p>
+        </div>
+      </div>
+
+      <p class="shade-hero__rail-label">Tap any shade to preview</p>
+      <div class="shade-hero__rail">
+        <span class="shade-hero__dot" style="background:#f5e0cc;" title="Porcelain"></span>
+        <span class="shade-hero__dot" style="background:#f0dcc4;" title="Fair"></span>
+        <span class="shade-hero__dot" style="background:#eed5b8;" title="Fair Light"></span>
+        <span class="shade-hero__dot" style="background:#ecd0ae;" title="Light Beige"></span>
+        <span class="shade-hero__dot" style="background:#eacaa4;" title="Light Neutral"></span>
+        <span class="shade-hero__dot" style="background:#e8cba6;" title="Ivory"></span>
+        <span class="shade-hero__dot" style="background:#e3c39c;" title="Light Warm"></span>
+        <span class="shade-hero__dot" style="background:#dfbd95;" title="Light Sand"></span>
+        <span class="shade-hero__dot" style="background:#dab68b;" title="Beige"></span>
+        <span class="shade-hero__dot" style="background:#d4b68a;" title="Medium"></span>
+        <span class="shade-hero__dot" style="background:#d0ae80;" title="Medium Beige"></span>
+        <span class="shade-hero__dot" style="background:#cdac7e;" title="Medium Neutral"></span>
+        <span class="shade-hero__dot" style="background:#cba978;" title="Sand"></span>
+        <span class="shade-hero__dot is-active" style="background:#c9a776;" title="Medium Tan"></span>
+        <span class="shade-hero__dot" style="background:#c5a371;" title="Medium Warm"></span>
+        <span class="shade-hero__dot" style="background:#c19c69;" title="Honey"></span>
+        <span class="shade-hero__dot" style="background:#b9925e;" title="Tan"></span>
+        <span class="shade-hero__dot" style="background:#b08854;" title="Tan Warm"></span>
+        <span class="shade-hero__dot" style="background:#aa824f;" title="Tan Golden"></span>
+        <span class="shade-hero__dot" style="background:#a87e4a;" title="Caramel"></span>
+        <span class="shade-hero__dot" style="background:#9f7541;" title="Almond"></span>
+        <span class="shade-hero__dot" style="background:#966c39;" title="Amber"></span>
+        <span class="shade-hero__dot" style="background:#8d6930;" title="Deep"></span>
+        <span class="shade-hero__dot" style="background:#84602b;" title="Chestnut"></span>
+        <span class="shade-hero__dot" style="background:#7a5825;" title="Deep Warm"></span>
+        <span class="shade-hero__dot" style="background:#6f4f1f;" title="Mocha"></span>
+        <span class="shade-hero__dot" style="background:#65461a;" title="Cocoa"></span>
+        <span class="shade-hero__dot" style="background:#5b3d12;" title="Cocoa Deep"></span>
+        <span class="shade-hero__dot" style="background:#543900;" title="Espresso"></span>
+        <span class="shade-hero__dot" style="background:#3d2900;" title="Ebony"></span>
+      </div>
+
+      <div class="shade-hero__cta"><a href="#" class="button">Shop Foundation Stick</a></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. BEFORE / AFTER — V13: Text Left + Slider Right
+       ============================================================ -->
+  <section class="ba-v13">
+    <div class="ba-v13__inner">
+      <div class="ba-v13__copy">
+        <p class="ba-v13__eyebrow">Drag to Reveal</p>
+        <h2 class="ba-v13__heading">Coverage where you want it.</h2>
+        <p class="ba-v13__subhead">Buildable, skin-like coverage that evens tone without burying your features. Drag the handle to see what one swipe can do.</p>
+        <a href="#" class="button">Shop Foundation Stick</a>
+      </div>
+      <div class="ba-v13__slider">
+        <div class="a">
+          <img src="https://air-prod.imgix.net/3dd6c299-6630-440e-8f51-8c78fdbeae18.jpg?w=700&h=930&fit=crop&auto=format" alt="After">
+        </div>
+        <div class="b">
+          <img src="https://air-prod.imgix.net/f429435e-e95e-4c24-9691-d67623a86695.jpg?w=700&h=930&fit=crop&auto=format" alt="Before">
+        </div>
+        <div class="ba-v13__line"></div>
+        <div class="ba-v13__handle"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. BOBBI QUOTE — Black bg, portrait left + copy right
+       ============================================================ -->
+  <section class="bobbi-quote">
+    <div class="bobbi-quote__inner">
+      <div class="bobbi-quote__img">
+        <img src="https://air-prod.imgix.net/87f1416c-fef8-441a-b6eb-7733dd536b2f.jpg?w=840&h=1120&fit=crop&auto=format" alt="Bobbi Brown, founder of Jones Road Beauty" loading="lazy">
+      </div>
+      <div class="bobbi-quote__content">
+        <p class="bobbi-quote__eyebrow">From the Founder</p>
+        <p class="bobbi-quote__text">&ldquo;The goal was coverage that feels like nothing. You should look like you &mdash; just more even, more comfortable, more like your best&nbsp;skin.&rdquo;</p>
+        <p class="bobbi-quote__attr">Bobbi Brown &mdash; Founder, Jones Road Beauty</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. SURVEY STATS — V10: Wide 4-Across Stat Row
+       ============================================================ -->
+  <section class="stats-row">
+    <div class="stats-row__inner">
+      <p class="stats-row__eyebrow">Real Data</p>
+      <h2 class="stats-row__heading">We asked 181 women. Then we built&nbsp;it.</h2>
+      <p class="stats-row__sub">Every decision &mdash; texture, finish, shade range, price &mdash; traces back to this&nbsp;data.</p>
+
+      <div class="stats-row__grid">
+        <div class="stats-row__item">
+          <div class="stats-row__stat">76%</div>
+          <div class="stats-row__item-title">Want Weightless</div>
+          <div class="stats-row__item-desc">find &ldquo;weightless, comfortable all day&rdquo; very or extremely appealing</div>
+        </div>
+        <div class="stats-row__item">
+          <div class="stats-row__stat">90%</div>
+          <div class="stats-row__item-title">Right Now Matters</div>
+          <div class="stats-row__item-desc">care how it looks and feels today, not long-term claims</div>
+        </div>
+        <div class="stats-row__item">
+          <div class="stats-row__stat">66%</div>
+          <div class="stats-row__item-title">Skeptical of Sticks</div>
+          <div class="stats-row__item-desc">don&rsquo;t like or love foundation sticks &mdash; yet</div>
+        </div>
+        <div class="stats-row__item">
+          <div class="stats-row__stat">30</div>
+          <div class="stats-row__item-title">True-to-You Shades</div>
+          <div class="stats-row__item-desc">the widest shade range at $38, every undertone</div>
+        </div>
+      </div>
+
+      <p class="stats-row__source">Source: Your Skin Survey &middot; n=181 &middot; 2025</p>
+      <a href="#" class="button">Shop Foundation Stick</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. HOW TO APPLY — V03: 3-Step Progression
+       ============================================================ -->
+  <section class="how-v03">
+    <div class="how-v03__inner">
+      <p class="how-v03__eyebrow">How to Apply</p>
+      <h2 class="how-v03__heading">30 seconds.&nbsp;Done.</h2>
+      <div class="how-v03__progression">
+        <div class="how-v03__step">
+          <div class="how-v03__img"><img src="https://air-prod.imgix.net/f429435e-e95e-4c24-9691-d67623a86695.jpg?w=500&h=666&fit=crop&auto=format" alt="Swipe" loading="lazy"></div>
+          <p class="how-v03__num">Step 1</p>
+          <p class="how-v03__verb">Swipe</p>
+          <p class="how-v03__desc">Swipe directly onto skin wherever you want coverage. Cheeks, forehead, chin.</p>
+        </div>
+        <div class="how-v03__step">
+          <div class="how-v03__img"><img src="https://air-prod.imgix.net/3dd6c299-6630-440e-8f51-8c78fdbeae18.jpg?w=500&h=666&fit=crop&auto=format" alt="Blend" loading="lazy"></div>
+          <p class="how-v03__num">Step 2</p>
+          <p class="how-v03__verb">Blend</p>
+          <p class="how-v03__desc">Blend with fingers or The Face Blending Brush in short outward strokes.</p>
+        </div>
+        <div class="how-v03__step">
+          <div class="how-v03__img"><img src="https://air-prod.imgix.net/3dd6c299-6630-440e-8f51-8c78fdbeae18.jpg?w=500&h=666&fit=crop&auto=format&sat=8&con=5" alt="Build" loading="lazy"></div>
+          <p class="how-v03__num">Step 3</p>
+          <p class="how-v03__verb">Build</p>
+          <p class="how-v03__desc">Add another pass only where you want more. Medium to full, still like skin.</p>
+        </div>
+      </div>
+      <a href="#" class="button">Shop Foundation Stick</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. INGREDIENTS — 4-across equal cards
+       ============================================================ -->
+  <section class="ingr">
+    <div class="ingr__inner">
+      <p class="ingr__eyebrow">What&rsquo;s In It</p>
+      <h2 class="ingr__heading">A barrier-strengthening foundation. Yes,&nbsp;really.</h2>
+
+      <div class="ingr__grid">
+        <div class="ingr__card">
+          <div class="ingr__icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="22" stroke="#000" stroke-width="1.2"/>
+              <path d="M28 12c0 8-6 12-6 16s2.7 8 6 8 6-4 6-8-6-8-6-16z" stroke="#000" stroke-width="1.2" fill="none"/>
+              <line x1="20" y1="28" x2="36" y2="28" stroke="#000" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3 class="ingr__name">Ceramide NP</h3>
+          <div class="ingr__detail">
+            <p class="ingr__detail-label">What it is</p>
+            <p class="ingr__detail-value">A lipid your skin naturally makes to seal in moisture</p>
+          </div>
+          <div class="ingr__divider"></div>
+          <div class="ingr__detail">
+            <p class="ingr__detail-label">What it does</p>
+            <p class="ingr__detail-value">Restores your skin barrier while you wear it</p>
+          </div>
+        </div>
+
+        <div class="ingr__card">
+          <div class="ingr__icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 38c0-10 14-26 14-26s14 16 14 26a14 14 0 11-28 0z" stroke="#000" stroke-width="1.2" fill="none"/>
+              <circle cx="28" cy="36" r="5" stroke="#000" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3 class="ingr__name">Squalane</h3>
+          <div class="ingr__detail">
+            <p class="ingr__detail-label">What it is</p>
+            <p class="ingr__detail-value">Plant-derived emollient that mirrors your skin&rsquo;s own oils</p>
+          </div>
+          <div class="ingr__divider"></div>
+          <div class="ingr__detail">
+            <p class="ingr__detail-label">What it does</p>
+            <p class="ingr__detail-value">Locks in moisture so coverage never dries or cakes</p>
+          </div>
+        </div>
+
+        <div class="ingr__card">
+          <div class="ingr__icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="28" cy="28" rx="18" ry="12" stroke="#000" stroke-width="1.2" fill="none"/>
+              <ellipse cx="28" cy="28" rx="10" ry="7" stroke="#000" stroke-width="1" fill="none"/>
+              <circle cx="28" cy="28" r="3" stroke="#000" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="ingr__name">Shea Butter</h3>
+          <div class="ingr__detail">
+            <p class="ingr__detail-label">What it is</p>
+            <p class="ingr__detail-value">Fatty-acid-rich butter from the African shea tree</p>
+          </div>
+          <div class="ingr__divider"></div>
+          <div class="ingr__detail">
+            <p class="ingr__detail-label">What it does</p>
+            <p class="ingr__detail-value">Gives the creamy, glide-on feel without weight or wax</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. FAQs
+       ============================================================ -->
+  <section class="faqs">
+    <div class="faqs__inner">
+      <h2 class="faqs__heading">FAQs</h2>
+
+      <div class="faqs__item">
+        <button class="faqs__question" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false');this.nextElementSibling.classList.toggle('is-open')">How does The Foundation Stick differ from What The Foundation?</button>
+        <div class="faqs__answer">The Foundation Stick is a portable, mess-free stick format that delivers buildable medium-to-full coverage with a skin-like finish. What The Foundation is our tinted moisture balm with a lighter, more dewy feel. Think of the Stick as your go-to when you want more coverage with zero fuss.</div>
+      </div>
+
+      <div class="faqs__item">
+        <button class="faqs__question" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false');this.nextElementSibling.classList.toggle('is-open')">How does The Foundation Stick differ from traditional foundation?</button>
+        <div class="faqs__answer">Most stick foundations feel heavy, waxy, or sit on top of skin. Ours is formulated with Ceramide NP, squalane, and shea butter so it actually works with your skin barrier &mdash; not against it. The result is coverage that looks and feels like better skin, not makeup.</div>
+      </div>
+
+      <div class="faqs__item">
+        <button class="faqs__question" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false');this.nextElementSibling.classList.toggle('is-open')">How do I find the shade that&rsquo;s best for me?</button>
+        <div class="faqs__answer">We have 30 shades across fair, medium, tan, and deep &mdash; each with warm, cool, or neutral undertones. Use our shade quiz or swatch guide to narrow it down. If you&rsquo;re between shades, go with the one closest to your jawline in natural light.</div>
+      </div>
+
+      <div class="faqs__item">
+        <button class="faqs__question" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false');this.nextElementSibling.classList.toggle('is-open')">How much coverage can I get with The Foundation Stick?</button>
+        <div class="faqs__answer">One swipe gives you a natural, medium-coverage finish. Want more? Add a second pass only where you need it. It builds to full coverage without ever looking heavy or cakey.</div>
+      </div>
+
+      <div class="faqs__item">
+        <button class="faqs__question" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='false');this.nextElementSibling.classList.toggle('is-open')">Will this clog my pores?</button>
+        <div class="faqs__answer">No. The Foundation Stick is non-comedogenic and formulated without pore-clogging waxes. The ceramide and squalane base actually supports your skin barrier rather than compromising it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. REVIEWS
+       ============================================================ -->
+  <section class="reviews">
+    <div class="reviews__inner">
+      <h2 class="reviews__heading">Reviews</h2>
+
+      <div class="reviews__badges">
+        <div class="reviews__badge">
+          <div class="reviews__badge-value">4.46</div>
+          <div class="reviews__badge-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+          <div class="reviews__badge-label">Based on 52417 Reviews</div>
+        </div>
+        <div class="reviews__badge">
+          <div class="reviews__badge-headline">Non-Comedogenic</div>
+          <div class="reviews__badge-label">Proven to not clog pores</div>
+        </div>
+        <div class="reviews__badge">
+          <div class="reviews__badge-headline">Clinically proven</div>
+          <div class="reviews__badge-label">to provide all day hydration</div>
+        </div>
+        <div class="reviews__badge">
+          <div class="reviews__badge-headline">Up to 24 Hours</div>
+          <div class="reviews__badge-label">of skin moisturization</div>
+        </div>
+      </div>
+
+      <div class="reviews__toolbar">
+        <input type="text" class="reviews__search" placeholder="Search">
+        <div class="reviews__filters">
+          <select class="reviews__filter"><option>Sort by: Latest</option></select>
+          <select class="reviews__filter"><option>Age</option></select>
+          <select class="reviews__filter"><option>Skin Tone</option></select>
+          <select class="reviews__filter"><option>Skin Concerns</option></select>
+          <select class="reviews__filter"><option>Skin Type</option></select>
+          <select class="reviews__filter"><option>Rating</option></select>
+        </div>
+      </div>
+
+      <div class="reviews__card">
+        <div class="reviews__card-header">
+          <span class="reviews__card-name">Yasmine S.</span>
+          <span class="reviews__card-date">Verified Buyer</span>
+        </div>
+        <div class="reviews__card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="reviews__card-body">I really love the coverage of this foundation stick &mdash; it feels light, the way I love to use face powder, you call it in. It feels glossy and looks silky.</p>
+      </div>
+
+      <div class="reviews__card">
+        <div class="reviews__card-header">
+          <span class="reviews__card-name">Becca</span>
+          <span class="reviews__card-date">Verified Buyer</span>
+        </div>
+        <div class="reviews__card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="reviews__card-body">My new go-to foundation! I never thought a stick could give me a smooth natural finish &mdash; it feels like nothing on my skin but covers everything I want it to.</p>
+      </div>
+
+      <div class="reviews__card">
+        <div class="reviews__card-header">
+          <span class="reviews__card-name">Margot L.</span>
+          <span class="reviews__card-date">Verified Buyer</span>
+        </div>
+        <div class="reviews__card-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <p class="reviews__card-body">Very moisturizing &mdash; by mid-afternoon it still looked fresh. A good everyday option for those of us who don&rsquo;t want to fuss.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
