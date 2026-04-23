@@ -85,7 +85,43 @@
     }
 
     /* ============================================================
-       1. SHADE CONFIDENCE — 3 OPTIONS TO COMPARE
+       1. SHADE CONFIDENCE — Combined (stat bar + quiz panel + grid)
+       ============================================================ */
+    .shade-quiz { background: #f6f2eb; padding: 72px 20px; }
+    .shade-quiz__inner { max-width: 1200px; margin: 0 auto; }
+    .shade-quiz__header { text-align: center; margin-block-end: 40px; }
+    .shade-quiz__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 14px; }
+    .shade-quiz__heading { font-family: var(--font-serif); font-size: 42px; font-weight: 300; line-height: 1.15; letter-spacing: .5px; text-wrap: balance; }
+    .shade-quiz__stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-block-end: 56px; border-block: 1px solid rgba(0,0,0,.15); }
+    .shade-quiz__stat { text-align: center; padding: 24px 20px; border-inline-end: 1px solid rgba(0,0,0,.15); }
+    .shade-quiz__stat:last-child { border-inline-end: none; }
+    .shade-quiz__stat-num { font-family: var(--font-serif); font-size: 44px; font-weight: 300; line-height: 1; letter-spacing: .5px; margin-block-end: 8px; }
+    .shade-quiz__stat-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: #333; }
+    .shade-quiz__body { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+    .shade-quiz__panel { background: #000; color: #fff; padding: 48px 44px; border-radius: 3px; }
+    .shade-quiz__panel-eyebrow { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.7); margin-block-end: 16px; }
+    .shade-quiz__panel-head { font-family: var(--font-serif); font-size: 32px; font-weight: 300; line-height: 1.2; letter-spacing: .5px; margin-block-end: 18px; text-wrap: balance; }
+    .shade-quiz__panel-copy { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.85); margin-block-end: 28px; max-width: 420px; }
+    .shade-quiz__btn { display: inline-block; background: #fff; color: #000; font-family: var(--font-mono); font-size: 13px; font-weight: 550; text-transform: uppercase; letter-spacing: .4px; height: 40px; line-height: 40px; padding: 0 36px; border: 1px solid #fff; border-radius: 2px; text-decoration: none; transition: background .4s var(--ease-primary), color .4s var(--ease-primary); }
+    .has-mouse .shade-quiz__btn:hover { background: transparent; color: #fff; }
+    .shade-quiz__swatches { padding-inline-start: 8px; }
+    .shade-quiz__swatch-eyebrow { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 12px; }
+    .shade-quiz__swatch-head { font-family: var(--font-serif); font-size: 24px; font-weight: 300; line-height: 1.2; letter-spacing: .5px; margin-block-end: 24px; text-wrap: balance; }
+    .shade-quiz__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-block-end: 16px; max-width: 420px; }
+    .shade-quiz__dot { aspect-ratio: 1; border-radius: 100%; }
+    .shade-quiz__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: #757575; max-width: 420px; }
+    @media (max-width: 860px) {
+      .shade-quiz { padding: 48px 20px; }
+      .shade-quiz__heading { font-size: 28px; }
+      .shade-quiz__stat-num { font-size: 32px; }
+      .shade-quiz__body { grid-template-columns: 1fr; gap: 32px; }
+      .shade-quiz__panel { padding: 36px 28px; }
+      .shade-quiz__panel-head { font-size: 24px; }
+      .shade-quiz__swatches { padding-inline-start: 0; }
+    }
+
+    /* ============================================================
+       LEGACY OPTION STYLES (hidden — kept for reference)
        ============================================================ */
     .option-banner { background: #111; color: #fff; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-align: center; padding: 12px 20px; }
     .option-banner__tag { display: inline-block; padding: 4px 10px; border: 1px solid rgba(255,255,255,.4); margin-inline-end: 10px; }
@@ -449,11 +485,45 @@
   </div>
 
   <!-- ============================================================
-       1. SHADE CONFIDENCE — 3 CONCEPTS TO COMPARE
+       1. SHADE CONFIDENCE — Combined (stat bar + quiz panel + grid)
        ============================================================ -->
+  <section class="shade-quiz">
+    <div class="shade-quiz__inner">
+      <div class="shade-quiz__header">
+        <p class="shade-quiz__eyebrow">30 Shades, One Match</p>
+        <h2 class="shade-quiz__heading">Your perfect shade — 60&nbsp;seconds away.</h2>
+      </div>
+      <div class="shade-quiz__stats">
+        <div class="shade-quiz__stat"><div class="shade-quiz__stat-num">30</div><div class="shade-quiz__stat-label">Shades</div></div>
+        <div class="shade-quiz__stat"><div class="shade-quiz__stat-num">3</div><div class="shade-quiz__stat-label">Undertones · Cool · Neutral · Warm</div></div>
+        <div class="shade-quiz__stat"><div class="shade-quiz__stat-num">94%</div><div class="shade-quiz__stat-label">Matched on first try*</div></div>
+      </div>
+      <div class="shade-quiz__body">
+        <div class="shade-quiz__panel">
+          <p class="shade-quiz__panel-eyebrow">The Shade Quiz</p>
+          <h3 class="shade-quiz__panel-head">Three questions. One match. Zero guessing.</h3>
+          <p class="shade-quiz__panel-copy">Tell us about depth, undertone, and finish preference. We'll match you to one of 30 shades — with a free swap if it's not quite right.</p>
+          <a href="#" class="shade-quiz__btn">Take the Complexion Quiz</a>
+        </div>
+        <div class="shade-quiz__swatches">
+          <p class="shade-quiz__swatch-eyebrow">The Full Range</p>
+          <h3 class="shade-quiz__swatch-head">Every undertone. Every depth. One stick for all of&nbsp;it.</h3>
+          <div class="shade-quiz__grid">
+            <span class="shade-quiz__dot" style="background:#f5e0cc;"></span><span class="shade-quiz__dot" style="background:#f0dcc4;"></span><span class="shade-quiz__dot" style="background:#eed5b8;"></span><span class="shade-quiz__dot" style="background:#ecd0ae;"></span><span class="shade-quiz__dot" style="background:#eacaa4;"></span><span class="shade-quiz__dot" style="background:#e8cba6;"></span>
+            <span class="shade-quiz__dot" style="background:#e3c39c;"></span><span class="shade-quiz__dot" style="background:#dfbd95;"></span><span class="shade-quiz__dot" style="background:#dab68b;"></span><span class="shade-quiz__dot" style="background:#d4b68a;"></span><span class="shade-quiz__dot" style="background:#d0ae80;"></span><span class="shade-quiz__dot" style="background:#cdac7e;"></span>
+            <span class="shade-quiz__dot" style="background:#cba978;"></span><span class="shade-quiz__dot" style="background:#c9a776;"></span><span class="shade-quiz__dot" style="background:#c5a371;"></span><span class="shade-quiz__dot" style="background:#c19c69;"></span><span class="shade-quiz__dot" style="background:#b9925e;"></span><span class="shade-quiz__dot" style="background:#b08854;"></span>
+            <span class="shade-quiz__dot" style="background:#aa824f;"></span><span class="shade-quiz__dot" style="background:#a87e4a;"></span><span class="shade-quiz__dot" style="background:#9f7541;"></span><span class="shade-quiz__dot" style="background:#966c39;"></span><span class="shade-quiz__dot" style="background:#8d6930;"></span><span class="shade-quiz__dot" style="background:#84602b;"></span>
+            <span class="shade-quiz__dot" style="background:#7a5825;"></span><span class="shade-quiz__dot" style="background:#6f4f1f;"></span><span class="shade-quiz__dot" style="background:#65461a;"></span><span class="shade-quiz__dot" style="background:#5b3d12;"></span><span class="shade-quiz__dot" style="background:#543900;"></span><span class="shade-quiz__dot" style="background:#3d2900;"></span>
+          </div>
+          <p class="shade-quiz__caption">*Based on pre-launch consumer testing, n=500</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="option-banner"><span class="option-banner__tag">Option A</span> Quiz-led split — dark hero panel beside the 30-shade grid</div>
-  <section class="shade-a">
+  <!-- Legacy options — hidden -->
+  <div class="option-banner" style="display:none;"><span class="option-banner__tag">Option A</span> Quiz-led split — dark hero panel beside the 30-shade grid</div>
+  <section class="shade-a" style="display:none;">
     <div class="shade-a__inner">
       <div class="shade-a__panel">
         <p class="shade-a__eyebrow">The Shade Quiz</p>
@@ -524,8 +594,8 @@
     </div>
   </section>
 
-  <div class="option-banner"><span class="option-banner__tag">Option C</span> Quiz-first editorial — stat row on top, how-it-works on the right, swatch rail as secondary</div>
-  <section class="shade-c">
+  <div class="option-banner" style="display:none;"><span class="option-banner__tag">Option C</span> Quiz-first editorial — stat row on top, how-it-works on the right, swatch rail as secondary</div>
+  <section class="shade-c" style="display:none;">
     <div class="shade-c__inner">
       <div class="shade-c__header">
         <p class="shade-c__eyebrow">30 Shades, One Match</p>
