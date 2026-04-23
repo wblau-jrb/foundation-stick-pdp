@@ -85,33 +85,96 @@
     }
 
     /* ============================================================
-       1. SHADE CONFIDENCE — V07: Hero Shade + Thumbnail Rail (compact)
+       1. SHADE CONFIDENCE — 3 OPTIONS TO COMPARE
        ============================================================ */
-    .shade-hero { padding: 48px 20px; background: #f8f8f8; }
-    .shade-hero__inner { max-width: 1100px; margin: 0 auto; }
-    .shade-hero__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-black); margin-block-end: 10px; text-align: center; }
-    .shade-hero__heading { font-family: var(--font-serif); font-size: 36px; font-weight: 300; line-height: 1.2; color: var(--color-black); text-align: center; margin-block-end: 8px; text-wrap: balance; }
-    .shade-hero__subhead { display: none; }
-    .shade-hero__feature { display: flex; align-items: center; justify-content: center; gap: 24px; margin-block-end: 28px; }
-    .shade-hero__big { width: 140px; height: 140px; border-radius: 100%; background: #c9a776; box-shadow: 0 6px 20px rgba(0,0,0,.08); flex-shrink: 0; }
-    .shade-hero__feature-info { text-align: left; }
-    .shade-hero__feature-name { font-family: var(--font-serif); font-size: 26px; font-weight: 300; color: var(--color-black); margin-block-end: 4px; }
-    .shade-hero__feature-meta { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--color-black); margin-block-end: 4px; }
-    .shade-hero__feature-desc { font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: var(--color-black); max-width: 340px; }
-    .shade-hero__rail-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--color-black); text-align: center; margin-block-end: 12px; }
-    .shade-hero__rail { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 720px; margin: 0 auto; }
-    .shade-hero__dot { width: 28px; height: 28px; border-radius: 100%; cursor: pointer; border: 2px solid transparent; transition: transform .3s var(--ease-primary), border-color .3s var(--ease-primary); }
-    .has-mouse .shade-hero__dot:hover { transform: scale(1.12); }
-    .shade-hero__dot.is-active { border-color: var(--color-black); transform: scale(1.12); }
-    .shade-hero__cta { text-align: center; margin-block-start: 28px; }
-    @media (max-width: 640px) {
-      .shade-hero { padding: 36px 16px; }
-      .shade-hero__heading { font-size: 26px; line-height: 1.3; }
-      .shade-hero__feature { flex-direction: column; text-align: center; }
-      .shade-hero__feature-info { text-align: center; }
-      .shade-hero__big { width: 80px; height: 80px; }
-      .shade-hero__feature-name { font-size: 22px; }
-      .shade-hero__dot { width: 24px; height: 24px; }
+    .option-banner { background: #111; color: #fff; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-align: center; padding: 12px 20px; }
+    .option-banner__tag { display: inline-block; padding: 4px 10px; border: 1px solid rgba(255,255,255,.4); margin-inline-end: 10px; }
+
+    /* ---- Option A: Quiz-led split ---- */
+    .shade-a { background: #f6f2eb; padding: 72px 20px; }
+    .shade-a__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+    .shade-a__panel { background: #000; color: #fff; padding: 56px 48px; border-radius: 3px; }
+    .shade-a__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.7); margin-block-end: 20px; }
+    .shade-a__heading { font-family: var(--font-serif); font-size: 42px; font-weight: 300; line-height: 1.15; letter-spacing: .5px; margin-block-end: 20px; text-wrap: balance; }
+    .shade-a__copy { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.8); margin-block-end: 32px; max-width: 440px; }
+    .shade-a__stat-row { display: flex; gap: 40px; margin-block-end: 36px; padding-block: 24px; border-block: 1px solid rgba(255,255,255,.2); }
+    .shade-a__stat-num { font-family: var(--font-serif); font-size: 38px; font-weight: 300; line-height: 1; margin-block-end: 8px; letter-spacing: .5px; }
+    .shade-a__stat-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: rgba(255,255,255,.7); }
+    .shade-a__btn { display: inline-block; background: #fff; color: #000; font-family: var(--font-mono); font-size: 13px; font-weight: 550; text-transform: uppercase; letter-spacing: .4px; height: 40px; line-height: 40px; padding: 0 36px; border: 1px solid #fff; border-radius: 2px; text-decoration: none; transition: background .4s var(--ease-primary), color .4s var(--ease-primary), border-color .4s var(--ease-primary); }
+    .has-mouse .shade-a__btn:hover { background: transparent; color: #fff; border-color: #fff; }
+    .shade-a__swatches { padding-inline-start: 8px; }
+    .shade-a__swatch-eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 12px; }
+    .shade-a__swatch-head { font-family: var(--font-serif); font-size: 28px; font-weight: 300; line-height: 1.2; letter-spacing: .5px; margin-block-end: 28px; text-wrap: balance; }
+    .shade-a__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-block-end: 20px; max-width: 420px; }
+    .shade-a__dot { aspect-ratio: 1; border-radius: 100%; }
+    .shade-a__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: #757575; max-width: 420px; }
+    @media (max-width: 860px) {
+      .shade-a__inner { grid-template-columns: 1fr; gap: 32px; }
+      .shade-a__panel { padding: 40px 28px; }
+      .shade-a__heading { font-size: 28px; }
+      .shade-a__stat-num { font-size: 32px; }
+      .shade-a__swatches { padding-inline-start: 0; }
+    }
+
+    /* ---- Option B: Three undertones story ---- */
+    .shade-b { background: #fff; padding: 72px 20px 0; }
+    .shade-b__header { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+    .shade-b__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 14px; }
+    .shade-b__heading { font-family: var(--font-serif); font-size: 42px; font-weight: 300; line-height: 1.15; letter-spacing: .5px; text-wrap: balance; margin-block-end: 14px; }
+    .shade-b__subhead { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: #333; max-width: 480px; margin: 0 auto; }
+    .shade-b__row { max-width: 1100px; margin: 0 auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding-block-end: 64px; }
+    .shade-b__img { aspect-ratio: 3/4; overflow: hidden; border-radius: 3px; margin-block-end: 20px; background: #eee; }
+    .shade-b__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .shade-b__col-label { font-family: var(--font-display); font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 6px; }
+    .shade-b__col-count { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #757575; margin-block-end: 14px; }
+    .shade-b__strip { display: flex; gap: 6px; flex-wrap: wrap; }
+    .shade-b__strip-dot { width: 22px; height: 22px; border-radius: 100%; }
+    .shade-b__cta-band { background: #000; color: #fff; padding: 48px 20px; }
+    .shade-b__cta-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .shade-b__cta-text { text-align: left; max-width: 460px; }
+    .shade-b__cta-eyebrow { font-family: var(--font-display); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.6); margin-block-end: 12px; }
+    .shade-b__cta-copy { font-family: var(--font-serif); font-size: 28px; font-weight: 300; line-height: 1.2; letter-spacing: .5px; text-wrap: balance; }
+    .shade-b__cta-btn { display: inline-block; background: #fff; color: #000; font-family: var(--font-mono); font-size: 13px; font-weight: 550; text-transform: uppercase; letter-spacing: .4px; height: 40px; line-height: 40px; padding: 0 36px; border: 1px solid #fff; border-radius: 2px; text-decoration: none; transition: background .4s var(--ease-primary), color .4s var(--ease-primary); }
+    .has-mouse .shade-b__cta-btn:hover { background: transparent; color: #fff; }
+    @media (max-width: 860px) {
+      .shade-b__heading { font-size: 28px; }
+      .shade-b__row { grid-template-columns: 1fr; gap: 28px; padding-block-end: 48px; }
+      .shade-b__cta-inner { flex-direction: column; gap: 24px; }
+      .shade-b__cta-text { text-align: center; }
+      .shade-b__cta-copy { font-size: 22px; }
+    }
+
+    /* ---- Option C: Quiz-first editorial with stats ---- */
+    .shade-c { background: #f6f2eb; padding: 72px 20px; }
+    .shade-c__inner { max-width: 1100px; margin: 0 auto; }
+    .shade-c__header { text-align: center; margin-block-end: 48px; }
+    .shade-c__eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 14px; }
+    .shade-c__heading { font-family: var(--font-serif); font-size: 42px; font-weight: 300; line-height: 1.15; letter-spacing: .5px; text-wrap: balance; }
+    .shade-c__stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-block-end: 56px; border-block: 1px solid rgba(0,0,0,.15); }
+    .shade-c__stat { text-align: center; padding: 28px 20px; border-inline-end: 1px solid rgba(0,0,0,.15); }
+    .shade-c__stat:last-child { border-inline-end: none; }
+    .shade-c__stat-num { font-family: var(--font-serif); font-size: 48px; font-weight: 300; line-height: 1; letter-spacing: .5px; margin-block-end: 8px; }
+    .shade-c__stat-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: #333; }
+    .shade-c__body { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .shade-c__img { aspect-ratio: 1; overflow: hidden; border-radius: 3px; background: #eee; }
+    .shade-c__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .shade-c__steps-eyebrow { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-block-end: 16px; }
+    .shade-c__steps-head { font-family: var(--font-serif); font-size: 28px; font-weight: 300; line-height: 1.2; letter-spacing: .5px; margin-block-end: 28px; text-wrap: balance; }
+    .shade-c__step { display: flex; gap: 20px; padding-block: 18px; border-top: 1px solid rgba(0,0,0,.15); }
+    .shade-c__step:last-of-type { border-bottom: 1px solid rgba(0,0,0,.15); }
+    .shade-c__step-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: #757575; flex-shrink: 0; width: 28px; padding-block-start: 2px; }
+    .shade-c__step-text { font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: #000; }
+    .shade-c__step-text strong { font-weight: 700; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .5px; display: block; margin-block-end: 4px; font-size: 13px; }
+    .shade-c__cta { margin-block-start: 28px; }
+    .shade-c__rail { margin-block-start: 56px; padding-block-start: 32px; border-top: 1px solid rgba(0,0,0,.15); text-align: center; }
+    .shade-c__rail-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: #757575; margin-block-end: 16px; }
+    .shade-c__rail-dots { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; max-width: 720px; margin: 0 auto; }
+    .shade-c__rail-dot { width: 22px; height: 22px; border-radius: 100%; }
+    @media (max-width: 860px) {
+      .shade-c__heading { font-size: 28px; }
+      .shade-c__stat-num { font-size: 32px; }
+      .shade-c__body { grid-template-columns: 1fr; gap: 32px; }
+      .shade-c__steps-head { font-size: 22px; }
     }
 
     /* ============================================================
@@ -386,58 +449,112 @@
   </div>
 
   <!-- ============================================================
-       1. SHADE CONFIDENCE — V07: Hero Shade + Thumbnail Rail
+       1. SHADE CONFIDENCE — 3 CONCEPTS TO COMPARE
        ============================================================ -->
-  <section class="shade-hero">
-    <div class="shade-hero__inner">
-      <p class="shade-hero__eyebrow">30 Shades</p>
-      <h2 class="shade-hero__heading">One stick. The right shade for&nbsp;every&nbsp;you.</h2>
-      <p class="shade-hero__subhead">Built across fair, medium, tan, and deep with warm, cool, and neutral undertones in&nbsp;every&nbsp;family.</p>
 
-      <div class="shade-hero__feature">
-        <div class="shade-hero__big"></div>
-        <div class="shade-hero__feature-info">
-          <h3 class="shade-hero__feature-name">Medium Tan</h3>
-          <p class="shade-hero__feature-meta">Warm-Golden Undertone</p>
-          <p class="shade-hero__feature-desc">Best for medium-tan skin with warm golden undertones. The most-loved shade in early&nbsp;testing.</p>
+  <div class="option-banner"><span class="option-banner__tag">Option A</span> Quiz-led split — dark hero panel beside the 30-shade grid</div>
+  <section class="shade-a">
+    <div class="shade-a__inner">
+      <div class="shade-a__panel">
+        <p class="shade-a__eyebrow">The Shade Quiz</p>
+        <h2 class="shade-a__heading">Your perfect shade, three questions away.</h2>
+        <p class="shade-a__copy">Skin depth. Undertone. Finish preference. Our 60-second quiz reads all three, then matches you to one of 30 shades engineered to disappear into every skin.</p>
+        <div class="shade-a__stat-row">
+          <div class="shade-a__stat"><div class="shade-a__stat-num">94%</div><div class="shade-a__stat-label">Matched on first try*</div></div>
+          <div class="shade-a__stat"><div class="shade-a__stat-num">60s</div><div class="shade-a__stat-label">To your match</div></div>
+        </div>
+        <a href="#" class="shade-a__btn">Find My Shade</a>
+      </div>
+      <div class="shade-a__swatches">
+        <p class="shade-a__swatch-eyebrow">30 Shades</p>
+        <h3 class="shade-a__swatch-head">Every undertone. Every depth. One stick for all of it.</h3>
+        <div class="shade-a__grid">
+          <span class="shade-a__dot" style="background:#f5e0cc;"></span><span class="shade-a__dot" style="background:#f0dcc4;"></span><span class="shade-a__dot" style="background:#eed5b8;"></span><span class="shade-a__dot" style="background:#ecd0ae;"></span><span class="shade-a__dot" style="background:#eacaa4;"></span><span class="shade-a__dot" style="background:#e8cba6;"></span>
+          <span class="shade-a__dot" style="background:#e3c39c;"></span><span class="shade-a__dot" style="background:#dfbd95;"></span><span class="shade-a__dot" style="background:#dab68b;"></span><span class="shade-a__dot" style="background:#d4b68a;"></span><span class="shade-a__dot" style="background:#d0ae80;"></span><span class="shade-a__dot" style="background:#cdac7e;"></span>
+          <span class="shade-a__dot" style="background:#cba978;"></span><span class="shade-a__dot" style="background:#c9a776;"></span><span class="shade-a__dot" style="background:#c5a371;"></span><span class="shade-a__dot" style="background:#c19c69;"></span><span class="shade-a__dot" style="background:#b9925e;"></span><span class="shade-a__dot" style="background:#b08854;"></span>
+          <span class="shade-a__dot" style="background:#aa824f;"></span><span class="shade-a__dot" style="background:#a87e4a;"></span><span class="shade-a__dot" style="background:#9f7541;"></span><span class="shade-a__dot" style="background:#966c39;"></span><span class="shade-a__dot" style="background:#8d6930;"></span><span class="shade-a__dot" style="background:#84602b;"></span>
+          <span class="shade-a__dot" style="background:#7a5825;"></span><span class="shade-a__dot" style="background:#6f4f1f;"></span><span class="shade-a__dot" style="background:#65461a;"></span><span class="shade-a__dot" style="background:#5b3d12;"></span><span class="shade-a__dot" style="background:#543900;"></span><span class="shade-a__dot" style="background:#3d2900;"></span>
+        </div>
+        <p class="shade-a__caption">*Based on pre-launch consumer testing, n=500</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="option-banner"><span class="option-banner__tag">Option B</span> Three-undertone story — 10 shades per undertone family, quiz CTA band at bottom</div>
+  <section class="shade-b">
+    <div class="shade-b__header">
+      <p class="shade-b__eyebrow">30 Shades</p>
+      <h2 class="shade-b__heading">A shade made for every undertone.</h2>
+      <p class="shade-b__subhead">Ten shades across cool, neutral, and warm — so the range goes wider than depth alone. Not sure which undertone you are? That's what the quiz is for.</p>
+    </div>
+    <div class="shade-b__row">
+      <div class="shade-b__col">
+        <div class="shade-b__img"><img src="https://air-prod.imgix.net/1d93b483-f9c5-4e9e-b8a5-1a998622b495.jpg?w=600&h=800&fit=crop&auto=format" alt="Model with cool undertone"></div>
+        <p class="shade-b__col-label">Cool</p>
+        <p class="shade-b__col-count">10 shades · pink and red undertones</p>
+        <div class="shade-b__strip">
+          <span class="shade-b__strip-dot" style="background:#f5e0cc;"></span><span class="shade-b__strip-dot" style="background:#ecd0ae;"></span><span class="shade-b__strip-dot" style="background:#e8cba6;"></span><span class="shade-b__strip-dot" style="background:#d4b68a;"></span><span class="shade-b__strip-dot" style="background:#cdac7e;"></span><span class="shade-b__strip-dot" style="background:#b9925e;"></span><span class="shade-b__strip-dot" style="background:#84602b;"></span><span class="shade-b__strip-dot" style="background:#6f4f1f;"></span><span class="shade-b__strip-dot" style="background:#5b3d12;"></span><span class="shade-b__strip-dot" style="background:#3d2900;"></span>
         </div>
       </div>
-
-      <p class="shade-hero__rail-label">Tap any shade to preview</p>
-      <div class="shade-hero__rail">
-        <span class="shade-hero__dot" style="background:#f5e0cc;" title="Porcelain"></span>
-        <span class="shade-hero__dot" style="background:#f0dcc4;" title="Fair"></span>
-        <span class="shade-hero__dot" style="background:#eed5b8;" title="Fair Light"></span>
-        <span class="shade-hero__dot" style="background:#ecd0ae;" title="Light Beige"></span>
-        <span class="shade-hero__dot" style="background:#eacaa4;" title="Light Neutral"></span>
-        <span class="shade-hero__dot" style="background:#e8cba6;" title="Ivory"></span>
-        <span class="shade-hero__dot" style="background:#e3c39c;" title="Light Warm"></span>
-        <span class="shade-hero__dot" style="background:#dfbd95;" title="Light Sand"></span>
-        <span class="shade-hero__dot" style="background:#dab68b;" title="Beige"></span>
-        <span class="shade-hero__dot" style="background:#d4b68a;" title="Medium"></span>
-        <span class="shade-hero__dot" style="background:#d0ae80;" title="Medium Beige"></span>
-        <span class="shade-hero__dot" style="background:#cdac7e;" title="Medium Neutral"></span>
-        <span class="shade-hero__dot" style="background:#cba978;" title="Sand"></span>
-        <span class="shade-hero__dot is-active" style="background:#c9a776;" title="Medium Tan"></span>
-        <span class="shade-hero__dot" style="background:#c5a371;" title="Medium Warm"></span>
-        <span class="shade-hero__dot" style="background:#c19c69;" title="Honey"></span>
-        <span class="shade-hero__dot" style="background:#b9925e;" title="Tan"></span>
-        <span class="shade-hero__dot" style="background:#b08854;" title="Tan Warm"></span>
-        <span class="shade-hero__dot" style="background:#aa824f;" title="Tan Golden"></span>
-        <span class="shade-hero__dot" style="background:#a87e4a;" title="Caramel"></span>
-        <span class="shade-hero__dot" style="background:#9f7541;" title="Almond"></span>
-        <span class="shade-hero__dot" style="background:#966c39;" title="Amber"></span>
-        <span class="shade-hero__dot" style="background:#8d6930;" title="Deep"></span>
-        <span class="shade-hero__dot" style="background:#84602b;" title="Chestnut"></span>
-        <span class="shade-hero__dot" style="background:#7a5825;" title="Deep Warm"></span>
-        <span class="shade-hero__dot" style="background:#6f4f1f;" title="Mocha"></span>
-        <span class="shade-hero__dot" style="background:#65461a;" title="Cocoa"></span>
-        <span class="shade-hero__dot" style="background:#5b3d12;" title="Cocoa Deep"></span>
-        <span class="shade-hero__dot" style="background:#543900;" title="Espresso"></span>
-        <span class="shade-hero__dot" style="background:#3d2900;" title="Ebony"></span>
+      <div class="shade-b__col">
+        <div class="shade-b__img"><img src="https://air-prod.imgix.net/26c698d6-9998-4f96-bae0-4f0671452fc6.jpg?w=600&h=800&fit=crop&auto=format" alt="Model with neutral undertone"></div>
+        <p class="shade-b__col-label">Neutral</p>
+        <p class="shade-b__col-count">10 shades · balanced pink-to-yellow</p>
+        <div class="shade-b__strip">
+          <span class="shade-b__strip-dot" style="background:#f0dcc4;"></span><span class="shade-b__strip-dot" style="background:#eacaa4;"></span><span class="shade-b__strip-dot" style="background:#dfbd95;"></span><span class="shade-b__strip-dot" style="background:#d0ae80;"></span><span class="shade-b__strip-dot" style="background:#c9a776;"></span><span class="shade-b__strip-dot" style="background:#b08854;"></span><span class="shade-b__strip-dot" style="background:#a87e4a;"></span><span class="shade-b__strip-dot" style="background:#966c39;"></span><span class="shade-b__strip-dot" style="background:#7a5825;"></span><span class="shade-b__strip-dot" style="background:#543900;"></span>
+        </div>
       </div>
+      <div class="shade-b__col">
+        <div class="shade-b__img"><img src="https://air-prod.imgix.net/476d8004-173d-4a6b-b040-8ee0f7a79da0.jpg?w=600&h=800&fit=crop&auto=format" alt="Model with warm undertone"></div>
+        <p class="shade-b__col-label">Warm</p>
+        <p class="shade-b__col-count">10 shades · golden and olive undertones</p>
+        <div class="shade-b__strip">
+          <span class="shade-b__strip-dot" style="background:#eed5b8;"></span><span class="shade-b__strip-dot" style="background:#e3c39c;"></span><span class="shade-b__strip-dot" style="background:#dab68b;"></span><span class="shade-b__strip-dot" style="background:#cba978;"></span><span class="shade-b__strip-dot" style="background:#c5a371;"></span><span class="shade-b__strip-dot" style="background:#c19c69;"></span><span class="shade-b__strip-dot" style="background:#aa824f;"></span><span class="shade-b__strip-dot" style="background:#9f7541;"></span><span class="shade-b__strip-dot" style="background:#8d6930;"></span><span class="shade-b__strip-dot" style="background:#65461a;"></span>
+        </div>
+      </div>
+    </div>
+    <div class="shade-b__cta-band">
+      <div class="shade-b__cta-inner">
+        <div class="shade-b__cta-text">
+          <p class="shade-b__cta-eyebrow">The Shade Quiz</p>
+          <p class="shade-b__cta-copy">Not sure which you are? Three questions. One match. Sixty seconds.</p>
+        </div>
+        <a href="#" class="shade-b__cta-btn">Take the Complexion Quiz</a>
+      </div>
+    </div>
+  </section>
 
-      <div class="shade-hero__cta"><a href="#" class="button">Shop Foundation Stick</a></div>
+  <div class="option-banner"><span class="option-banner__tag">Option C</span> Quiz-first editorial — stat row on top, how-it-works on the right, swatch rail as secondary</div>
+  <section class="shade-c">
+    <div class="shade-c__inner">
+      <div class="shade-c__header">
+        <p class="shade-c__eyebrow">30 Shades, One Match</p>
+        <h2 class="shade-c__heading">Your perfect shade — 60&nbsp;seconds away.</h2>
+      </div>
+      <div class="shade-c__stats">
+        <div class="shade-c__stat"><div class="shade-c__stat-num">30</div><div class="shade-c__stat-label">Shades</div></div>
+        <div class="shade-c__stat"><div class="shade-c__stat-num">3</div><div class="shade-c__stat-label">Undertones · Cool · Neutral · Warm</div></div>
+        <div class="shade-c__stat"><div class="shade-c__stat-num">94%</div><div class="shade-c__stat-label">Matched on first try*</div></div>
+      </div>
+      <div class="shade-c__body">
+        <div class="shade-c__img"><img src="https://air-prod.imgix.net/26c698d6-9998-4f96-bae0-4f0671452fc6.jpg?w=800&h=800&fit=crop&auto=format" alt="Model wearing Foundation Stick"></div>
+        <div>
+          <p class="shade-c__steps-eyebrow">How the Quiz Works</p>
+          <h3 class="shade-c__steps-head">Three questions. One match. Zero guessing.</h3>
+          <div class="shade-c__step"><div class="shade-c__step-num">01</div><div class="shade-c__step-text"><strong>Tell us your depth</strong>Fair, light, medium, tan, or deep — a quick visual, no jargon.</div></div>
+          <div class="shade-c__step"><div class="shade-c__step-num">02</div><div class="shade-c__step-text"><strong>We decode your undertone</strong>One answer about your veins or the jewelry that flatters you most.</div></div>
+          <div class="shade-c__step"><div class="shade-c__step-num">03</div><div class="shade-c__step-text"><strong>Your match appears</strong>One of 30 shades, matched to your skin — with a swap offer if it's not quite right.</div></div>
+          <div class="shade-c__cta"><a href="#" class="button">Take the 60-Second Quiz</a></div>
+        </div>
+      </div>
+      <div class="shade-c__rail">
+        <p class="shade-c__rail-label">Prefer to browse? All 30 shades.</p>
+        <div class="shade-c__rail-dots">
+          <span class="shade-c__rail-dot" style="background:#f5e0cc;"></span><span class="shade-c__rail-dot" style="background:#f0dcc4;"></span><span class="shade-c__rail-dot" style="background:#eed5b8;"></span><span class="shade-c__rail-dot" style="background:#ecd0ae;"></span><span class="shade-c__rail-dot" style="background:#eacaa4;"></span><span class="shade-c__rail-dot" style="background:#e8cba6;"></span><span class="shade-c__rail-dot" style="background:#e3c39c;"></span><span class="shade-c__rail-dot" style="background:#dfbd95;"></span><span class="shade-c__rail-dot" style="background:#dab68b;"></span><span class="shade-c__rail-dot" style="background:#d4b68a;"></span>
+          <span class="shade-c__rail-dot" style="background:#d0ae80;"></span><span class="shade-c__rail-dot" style="background:#cdac7e;"></span><span class="shade-c__rail-dot" style="background:#cba978;"></span><span class="shade-c__rail-dot" style="background:#c9a776;"></span><span class="shade-c__rail-dot" style="background:#c5a371;"></span><span class="shade-c__rail-dot" style="background:#c19c69;"></span><span class="shade-c__rail-dot" style="background:#b9925e;"></span><span class="shade-c__rail-dot" style="background:#b08854;"></span><span class="shade-c__rail-dot" style="background:#aa824f;"></span><span class="shade-c__rail-dot" style="background:#a87e4a;"></span>
+          <span class="shade-c__rail-dot" style="background:#9f7541;"></span><span class="shade-c__rail-dot" style="background:#966c39;"></span><span class="shade-c__rail-dot" style="background:#8d6930;"></span><span class="shade-c__rail-dot" style="background:#84602b;"></span><span class="shade-c__rail-dot" style="background:#7a5825;"></span><span class="shade-c__rail-dot" style="background:#6f4f1f;"></span><span class="shade-c__rail-dot" style="background:#65461a;"></span><span class="shade-c__rail-dot" style="background:#5b3d12;"></span><span class="shade-c__rail-dot" style="background:#543900;"></span><span class="shade-c__rail-dot" style="background:#3d2900;"></span>
+        </div>
+      </div>
     </div>
   </section>
 
